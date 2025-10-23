@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>[操作系统学习记录#02]程序 | ziHeng的个人博客</title><meta name="author" content="ziHeng"><meta name="copyright" content="ziHeng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="呃。。我真的真的不知道写什么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[操作系统学习记录#02]程序">
+<meta property="og:url" content="https://ziheng27-3.github.io/2025/10/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-02-%E7%A8%8B%E5%BA%8F/index.html">
+<meta property="og:site_name" content="ziHeng的个人博客">
+<meta property="og:description" content="呃。。我真的真的不知道写什么">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ziheng27-3.github.io/img/touxiang.jpg">
+<meta property="article:published_time" content="2025-10-11T08:43:09.000Z">
+<meta property="article:modified_time" content="2025-10-11T09:14:24.567Z">
+<meta property="article:author" content="ziHeng">
+<meta property="article:tag" content="OS">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ziheng27-3.github.io/img/touxiang.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "[操作系统学习记录#02]程序",
+  "url": "https://ziheng27-3.github.io/2025/10/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-02-%E7%A8%8B%E5%BA%8F/",
+  "image": "https://ziheng27-3.github.io/img/touxiang.jpg",
+  "datePublished": "2025-10-11T08:43:09.000Z",
+  "dateModified": "2025-10-11T09:14:24.567Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "ziHeng",
+      "url": "https://ziheng27-3.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://ziheng27-3.github.io/2025/10/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-02-%E7%A8%8B%E5%BA%8F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '[操作系统学习记录#02]程序',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/index.jpg);"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">ziHeng的个人博客</span></a><a class="nav-page-title" href="/"><span class="site-name">[操作系统学习记录#02]程序</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">[操作系统学习记录#02]程序</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-11T08:43:09.000Z" title="发表于 2025-10-11 16:43:09">2025-10-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-11T09:14:24.567Z" title="更新于 2025-10-11 17:14:24">2025-10-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/sys/">sys</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="一、汇编语言"><a href="#一、汇编语言" class="headerlink" title="一、汇编语言"></a>一、汇编语言</h2><p>汇编语言是操作系统学习中不可或缺的一部分，<strong>它直接面向硬件</strong>，帮助我们理解 CPU 如何执行指令、如何操作内存以及操作系统与程序之间的交互机制。通过学习汇编语言，可以更好地理解操作系统的底层原理。</p>
+<ul>
+<li><strong>与机器语言对应</strong>：每条汇编指令对应一条机器指令，操作对象通常是寄存器和内存。</li>
+<li><strong>直接操作硬件</strong>：可以读写内存、控制CPU寄存器、调用中断。</li>
+<li><strong>理解操作系统原理</strong>：操作系统在启动、调度、系统调用时，底层机制常涉及汇编指令。</li>
+<li><strong>调试与性能优化</strong>：掌握汇编语言有助于理解程序运行效率、排查底层问题。</li>
+</ul>
+<h3 id="汇编语言快速入门"><a href="#汇编语言快速入门" class="headerlink" title="汇编语言快速入门"></a>汇编语言快速入门</h3><p>汇编语言是一种面向计算机底层硬件的低级语言，不同于高级语言，它直接操作寄存器和内存。根据平台和用途，常见的汇编语言种类包括：</p>
+<ul>
+<li><strong>x86 &#x2F; x86-64 汇编</strong>：最常见的 PC 架构汇编，资料丰富，适合学习计算机原理和操作系统。  </li>
+<li><strong>ARM 汇编</strong>：用于手机、嵌入式设备，RISC 架构，指令集简单，适合嵌入式开发。  </li>
+<li><strong>MIPS 汇编</strong>：经典教学架构，简洁，常用于计算机组成课程。  </li>
+<li><strong>RISC-V 汇编</strong>：新兴开源架构，指令精简，适合现代教学和实验。</li>
+</ul>
+<hr>
+<h3 id="1️-基础指令"><a href="#1️-基础指令" class="headerlink" title="1️ 基础指令"></a>1️ 基础指令</h3><p>最常用指令：</p>
+<p><strong>数据传输指令</strong>  </p>
+<ul>
+<li><code>MOV</code>：寄存器、内存、立即数之间移动数据  </li>
+<li><code>PUSH / POP</code>：堆栈操作</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">; 把立即数 10 赋值给寄存器 AX</span><br><span class="line">MOV AX, 10      </span><br><span class="line"></span><br><span class="line">; 把寄存器 AX 的值存入内存地址 0x1000</span><br><span class="line">MOV [0x1000], AX  </span><br><span class="line"></span><br><span class="line">; 从内存地址 0x1000 取值到寄存器 BX</span><br><span class="line">MOV BX, [0x1000]  </span><br><span class="line"></span><br><span class="line">; 把寄存器 BX 的值复制到寄存器 CX</span><br><span class="line">MOV CX, BX  </span><br></pre></td></tr></table></figure>
+
+<p>解释一下：  </p>
+<ul>
+<li><code>MOV 寄存器, 立即数</code>：直接赋值  </li>
+<li><code>MOV [内存地址], 寄存器</code>：把寄存器内容写入内存  </li>
+<li><code>MOV 寄存器, [内存地址]</code>：从内存取值到寄存器  </li>
+<li><code>MOV 寄存器, 寄存器</code>：寄存器之间复制数据</li>
+</ul>
+<p><strong>算术指令</strong>  </p>
+<ul>
+<li><code>ADD, SUB, INC, DEC</code>：基本算术运算  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">; 将 AX 加上 5</span><br><span class="line">ADD AX, 5      </span><br><span class="line"></span><br><span class="line">; 将 BX 减去 3</span><br><span class="line">SUB BX, 3      </span><br><span class="line"></span><br><span class="line">; 寄存器 CX 自增 1</span><br><span class="line">INC CX         </span><br><span class="line"></span><br><span class="line">; 寄存器 DX 自减 1</span><br><span class="line">DEC DX  </span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>逻辑&#x2F;位操作指令</strong>  </p>
+<ul>
+<li><code>AND, OR, XOR, NOT, SHL, SHR</code></li>
+</ul>
+<p><strong>跳转与比较</strong>  </p>
+<ul>
+<li><code>CMP</code> + 条件跳转（<code>JE</code>, <code>JNE</code>, <code>JG</code>, <code>JL</code> 等）  </li>
+<li><code>JMP</code>：无条件跳转</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">; 比较 AX 和 BX</span><br><span class="line">CMP AX, BX       </span><br><span class="line"></span><br><span class="line">; 相等则跳转到 label_equal</span><br><span class="line">JE label_equal   </span><br><span class="line"></span><br><span class="line">; 不相等则跳转到 label_notequal</span><br><span class="line">JNE label_notequal</span><br><span class="line"></span><br><span class="line">; 无条件跳转</span><br><span class="line">JMP label_end    </span><br><span class="line"></span><br><span class="line">; 标签示例</span><br><span class="line">label_equal:</span><br><span class="line">    ; 执行相等的操作</span><br><span class="line">    NOP</span><br><span class="line">label_notequal:</span><br><span class="line">    ; 执行不相等的操作</span><br><span class="line">    NOP</span><br><span class="line">label_end:</span><br><span class="line">    ; 结束</span><br><span class="line">    NOP</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>长跳转说明：</strong></p>
+<ul>
+<li>在 x86 汇编中，跳转指令分为短跳（short jump，8-bit 位移）和长跳（near&#x2F;far jump）</li>
+<li>短跳：偏移量 -128 到 +127 字节，只能跳到附近代码</li>
+<li>长跳：偏移量更大（16&#x2F;32-bit），可以跳到远处甚至不同段</li>
+<li>常用做函数调用或者跨段跳转</li>
+</ul>
+<p><strong>压栈弹出说明：</strong></p>
+<ul>
+<li>呃，我靠，我不知道怎么解释，反正，push指令就是：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sub esp, 4        ; 栈顶下移 4 字节（为32位值腾出空间）</span><br><span class="line">mov [esp], &lt;一个你想压栈的值&gt;    ; 把值写入新的栈顶</span><br></pre></td></tr></table></figure></li>
+<li>呃，剩下的交给以后的我再去解释</li>
+<li>我真服了，这玩意根本过不了aigc</li>
+</ul>
+<hr>
+<h2 id="二、应用程序在内存中的四个段"><a href="#二、应用程序在内存中的四个段" class="headerlink" title="二、应用程序在内存中的四个段"></a>二、应用程序在内存中的四个段</h2><h3 id="先介绍一下内存分片（Memory-Fragmentation）"><a href="#先介绍一下内存分片（Memory-Fragmentation）" class="headerlink" title="先介绍一下内存分片（Memory Fragmentation）"></a>先介绍一下内存分片（Memory Fragmentation）</h3><p>当操作系统或程序频繁进行内存的分配与释放时，内存空间会逐渐变得不连续，从而产生<strong>内存分片（fragmentation）</strong>。分片会导致系统有“足够的总内存”，却无法为某个程序分配连续的大块空间。</p>
+<h4 id="一、内存分片的分类"><a href="#一、内存分片的分类" class="headerlink" title="一、内存分片的分类"></a>一、内存分片的分类</h4><h5 id="1-外部碎片（External-Fragmentation）"><a href="#1-外部碎片（External-Fragmentation）" class="headerlink" title="1. 外部碎片（External Fragmentation）"></a>1. 外部碎片（External Fragmentation）</h5><ul>
+<li><strong>定义</strong>：当内存中的空闲块不连续，无法为一个需要较大连续内存的请求提供空间时，称为外部碎片。</li>
+<li><strong>原因</strong>：频繁分配与释放不同大小的内存块。</li>
+<li><strong>特点</strong>：空闲内存被分散成多个小块，即使总量足够，也无法整合为连续空间。</li>
+<li><strong>示意图</strong>：<br>内存空间（释放与分配后）：<br>[已用][空闲][已用][空闲][已用][空闲]<br>      ↑      ↑       ↑<br>  外部碎片区块（不连续）</li>
+</ul>
+<h5 id="2-内部碎片（Internal-Fragmentation）"><a href="#2-内部碎片（Internal-Fragmentation）" class="headerlink" title="2. 内部碎片（Internal Fragmentation）"></a>2. 内部碎片（Internal Fragmentation）</h5><ul>
+<li><strong>定义</strong>：当系统以固定大小的块分配内存，而程序并未完全使用该块时，未使用的部分称为内部碎片。</li>
+<li><strong>原因</strong>：分配单位过大，或分配策略不够灵活。</li>
+<li><strong>特点</strong>：空间浪费发生在块内部。</li>
+<li><strong>示意图</strong>：<br>分配的内存块（每块4KB）：<br>[程序A 3.2KB][程序B 2.7KB][程序C 4KB]<br>   ↑0.8KB浪费     ↑1.3KB浪费</li>
+</ul>
+<h4 id="二、解决方法"><a href="#二、解决方法" class="headerlink" title="二、解决方法"></a>二、解决方法</h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>适用场景</th>
+<th>思路</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内存紧缩（Compaction）</td>
+<td>操作系统层面</td>
+<td>将分散的空闲块移动到一起，形成连续空间</td>
+</tr>
+<tr>
+<td>分页（Paging）</td>
+<td>现代操作系统（如 Linux、Windows）</td>
+<td>将内存划分为固定大小的页（通常4KB），逻辑连续 ≠ 物理连续</td>
+</tr>
+<tr>
+<td>分区 &#x2F; 堆管理算法</td>
+<td>应用层内存分配器</td>
+<td>通过空闲链表、伙伴系统（Buddy System）等减少碎片</td>
+</tr>
+<tr>
+<td>内存池（Memory Pool）</td>
+<td>程序频繁分配小块内存</td>
+<td>预先分配一大片内存，由程序内部管理</td>
+</tr>
+</tbody></table>
+<h4 id="三、分页机制与碎片的关系"><a href="#三、分页机制与碎片的关系" class="headerlink" title="三、分页机制与碎片的关系"></a>三、分页机制与碎片的关系</h4><p>分页机制的引入几乎彻底消除了外部碎片，但由于页的固定大小（4KB、2MB等），仍可能产生内部碎片。</p>
+<p>逻辑页映射到物理页：<br>&lt;无实物展示&gt;</p>
+<h3 id="应用程序在内存中的四个主要段（从低地址到高地址）"><a href="#应用程序在内存中的四个主要段（从低地址到高地址）" class="headerlink" title="应用程序在内存中的四个主要段（从低地址到高地址）"></a>应用程序在内存中的四个主要段（从低地址到高地址）</h3><p>当一个程序被加载到内存中运行时，操作系统会为它划分出多个功能不同的区域（段），每个段承担特定职责。这些段共同构成了程序的 <strong>逻辑地址空间（Logical Address Space）</strong>，其地址分布从低到高依次为代码段、数据段、BSS段、堆、栈（堆与栈之间通常存在空闲地址空间）。</p>
+<h4 id="1-代码段（Code-Text-Segment）"><a href="#1-代码段（Code-Text-Segment）" class="headerlink" title="1. 代码段（Code&#x2F;Text Segment）"></a>1. 代码段（Code&#x2F;Text Segment）</h4><ul>
+<li><strong>核心内容</strong>：存放程序的 <strong>可执行机器指令</strong>（即编译后生成的二进制运行代码，如函数体内的执行逻辑）。</li>
+<li><strong>关键特性</strong>：<ul>
+<li>通常设置为 <strong>只读区域</strong>，防止程序运行过程中意外修改指令，避免逻辑混乱或崩溃。</li>
+<li>在多进程环境中可共享：若多个进程运行同一程序（如同时打开多个相同软件），可共用同一份代码段，大幅节省物理内存占用。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-数据段（Data-Segment）"><a href="#2-数据段（Data-Segment）" class="headerlink" title="2. 数据段（Data Segment）"></a>2. 数据段（Data Segment）</h4><ul>
+<li><strong>核心内容</strong>：存放 <strong>已初始化的全局变量</strong>（如 <code>int global_num = 10;</code>）和 <strong>已初始化的静态变量</strong>（如 <code>static int static_num = 20;</code>）。</li>
+<li><strong>关键特性</strong>：<ul>
+<li>初始化时机：程序加载到内存时，操作系统会根据可执行文件中记录的初始值，为该段变量分配空间并完成初始化。</li>
+<li>生命周期：与程序运行周期一致，变量值从程序启动到退出始终存在，不会随函数调用结束而释放。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-BSS-段（Block-Started-by-Symbol）"><a href="#3-BSS-段（Block-Started-by-Symbol）" class="headerlink" title="3. BSS 段（Block Started by Symbol）"></a>3. BSS 段（Block Started by Symbol）</h4><ul>
+<li><strong>核心内容</strong>：存放 <strong>未初始化的全局变量</strong>（如 <code>int uninit_global_num;</code>）和 <strong>未初始化的静态变量</strong>（如 <code>static int uninit_static_num;</code>）。</li>
+<li><strong>关键特性</strong>：<ul>
+<li>自动清零：程序加载时，操作系统会自动将该段所有变量初始化为 <strong>0 值</strong>（或空指针），无需程序员显式赋值。</li>
+<li>不占可执行文件空间：可执行文件中仅记录该段需分配的内存总大小，而非变量具体值，因此能减小文件体积。</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-栈（Stack-Segment）"><a href="#4-栈（Stack-Segment）" class="headerlink" title="4. 栈（Stack Segment）"></a>4. 栈（Stack Segment）</h4><ul>
+<li><strong>核心内容</strong>：支撑函数调用过程，存放 <strong>函数返回地址</strong>（函数执行完后需回到的调用位置）、<strong>函数参数</strong>、<strong>局部变量</strong>（如函数内定义的 <code>int local_num;</code>）。</li>
+<li><strong>关键特性</strong>：<ul>
+<li>地址增长方向：与堆相反，从高地址向低地址收缩（函数调用时栈空间扩展，函数返回时栈空间回收）。</li>
+<li>自动管理：由操作系统全程控制，无需程序员干预——函数调用时自动分配栈空间，函数执行结束后自动释放，避免内存泄漏。</li>
+<li>栈顶维护：由专用寄存器（x86 架构的 ESP 寄存器、x86-64 架构的 RSP 寄存器）记录 <strong>栈顶指针</strong>，实时指向当前栈的最顶端位置。</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-堆（Heap-Segment）"><a href="#5-堆（Heap-Segment）" class="headerlink" title="5. 堆（Heap Segment）"></a>5. 堆（Heap Segment）</h4><ul>
+<li><strong>核心内容</strong>：提供 <strong>动态内存分配</strong> 功能，存储程序运行中临时需要、大小不确定的数据（如动态创建的数组、对象，通过 <code>malloc()</code>、<code>new</code> 等函数申请）。</li>
+<li><strong>关键特性</strong>：<ul>
+<li>地址增长方向：从低地址向高地址逐步扩展。</li>
+<li>手动管理：需程序员显式调用分配函数（如 <code>malloc</code>）和释放函数（如 <code>free</code>）；若只分配不释放，会导致 <strong>内存泄漏</strong>，长期运行可能耗尽系统内存。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="三、函数调用约定与堆栈图"><a href="#三、函数调用约定与堆栈图" class="headerlink" title="三、函数调用约定与堆栈图"></a>三、函数调用约定与堆栈图</h2><h2 id="四、c语言"><a href="#四、c语言" class="headerlink" title="四、c语言"></a>四、c语言</h2><p><strong>按理来说应该说一下makefile？但我懒</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://ziheng27-3.github.io">ziHeng</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://ziheng27-3.github.io/2025/10/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-02-%E7%A8%8B%E5%BA%8F/">https://ziheng27-3.github.io/2025/10/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-02-%E7%A8%8B%E5%BA%8F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://ziheng27-3.github.io" target="_blank">ziHeng的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OS/">OS</a><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a></div><div class="post-share"><div class="social-share" data-image="/img/touxiang.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/10/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-01/" title="[操作系统学习记录#01]"><img class="cover" src="/img/3.1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">[操作系统学习记录#01]</div></div><div class="info-2"><div class="info-item-1">呃。。我真不知道写什么</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-01/" title="[操作系统学习记录#01]"><img class="cover" src="/img/3.1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-10</div><div class="info-item-2">[操作系统学习记录#01]</div></div><div class="info-2"><div class="info-item-1">呃。。我真不知道写什么</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">ziHeng</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">这里是ziHeng的个人博客，欢迎！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">一、汇编语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="toc-number">1.1.</span> <span class="toc-text">汇编语言快速入门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%B8%8F-%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4"><span class="toc-number">1.2.</span> <span class="toc-text">1️ 基础指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%9B%9B%E4%B8%AA%E6%AE%B5"><span class="toc-number">2.</span> <span class="toc-text">二、应用程序在内存中的四个段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B%E5%86%85%E5%AD%98%E5%88%86%E7%89%87%EF%BC%88Memory-Fragmentation%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">先介绍一下内存分片（Memory Fragmentation）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%86%85%E5%AD%98%E5%88%86%E7%89%87%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">2.1.1.</span> <span class="toc-text">一、内存分片的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%A4%96%E9%83%A8%E7%A2%8E%E7%89%87%EF%BC%88External-Fragmentation%EF%BC%89"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">1. 外部碎片（External Fragmentation）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%86%85%E9%83%A8%E7%A2%8E%E7%89%87%EF%BC%88Internal-Fragmentation%EF%BC%89"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">2. 内部碎片（Internal Fragmentation）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.2.</span> <span class="toc-text">二、解决方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%88%86%E9%A1%B5%E6%9C%BA%E5%88%B6%E4%B8%8E%E7%A2%8E%E7%89%87%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">2.1.3.</span> <span class="toc-text">三、分页机制与碎片的关系</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%9B%9B%E4%B8%AA%E4%B8%BB%E8%A6%81%E6%AE%B5%EF%BC%88%E4%BB%8E%E4%BD%8E%E5%9C%B0%E5%9D%80%E5%88%B0%E9%AB%98%E5%9C%B0%E5%9D%80%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">应用程序在内存中的四个主要段（从低地址到高地址）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%BB%A3%E7%A0%81%E6%AE%B5%EF%BC%88Code-Text-Segment%EF%BC%89"><span class="toc-number">2.2.1.</span> <span class="toc-text">1. 代码段（Code&#x2F;Text Segment）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E6%AE%B5%EF%BC%88Data-Segment%EF%BC%89"><span class="toc-number">2.2.2.</span> <span class="toc-text">2. 数据段（Data Segment）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-BSS-%E6%AE%B5%EF%BC%88Block-Started-by-Symbol%EF%BC%89"><span class="toc-number">2.2.3.</span> <span class="toc-text">3. BSS 段（Block Started by Symbol）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%A0%88%EF%BC%88Stack-Segment%EF%BC%89"><span class="toc-number">2.2.4.</span> <span class="toc-text">4. 栈（Stack Segment）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%A0%86%EF%BC%88Heap-Segment%EF%BC%89"><span class="toc-number">2.2.5.</span> <span class="toc-text">5. 堆（Heap Segment）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A%E4%B8%8E%E5%A0%86%E6%A0%88%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">三、函数调用约定与堆栈图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81c%E8%AF%AD%E8%A8%80"><span class="toc-number">4.</span> <span class="toc-text">四、c语言</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-02-%E7%A8%8B%E5%BA%8F/" title="[操作系统学习记录#02]程序">[操作系统学习记录#02]程序</a><time datetime="2025-10-11T08:43:09.000Z" title="发表于 2025-10-11 16:43:09">2025-10-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-01/" title="[操作系统学习记录#01]"><img src="/img/3.1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[操作系统学习记录#01]"/></a><div class="content"><a class="title" href="/2025/10/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-01/" title="[操作系统学习记录#01]">[操作系统学习记录#01]</a><time datetime="2025-10-10T11:13:55.000Z" title="发表于 2025-10-10 19:13:55">2025-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/20/%E5%88%9D%E5%AD%A6MySQL/" title="初学MySQL"><img src="/img/2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="初学MySQL"/></a><div class="content"><a class="title" href="/2025/03/20/%E5%88%9D%E5%AD%A6MySQL/" title="初学MySQL">初学MySQL</a><time datetime="2025-03-20T15:29:15.000Z" title="发表于 2025-03-20 23:29:15">2025-03-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/14/excel%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" title="基于Python+DeepSeek的Excel数据处理程序"><img src="/img/1.1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于Python+DeepSeek的Excel数据处理程序"/></a><div class="content"><a class="title" href="/2025/03/14/excel%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" title="基于Python+DeepSeek的Excel数据处理程序">基于Python+DeepSeek的Excel数据处理程序</a><time datetime="2025-03-14T04:33:21.000Z" title="发表于 2025-03-14 12:33:21">2025-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/13/hello-hexo/" title="Hello hexo, Hello World"><img src="/img/0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello hexo, Hello World"/></a><div class="content"><a class="title" href="/2025/03/13/hello-hexo/" title="Hello hexo, Hello World">Hello hexo, Hello World</a><time datetime="2025-03-13T08:46:25.000Z" title="发表于 2025-03-13 16:46:25">2025-03-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By ziHeng</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
